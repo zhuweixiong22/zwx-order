@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration>
+    <!--控制台日志输出配置项-->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <!--展示配置-->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                %d - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <!--文件info日志输出配置项-->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--LevelFilter： 级别过滤器，根据日志级别进行过滤。如果日志级别等于配置级别，过滤器会根据onMath 和 onMismatch接收或拒绝日志。-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--过滤error-->
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <!--每天输入一个日志文件 滚动输出-->
+        <encoder>
+            <pattern>
+                %d - %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略 按照时间滚动-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件路径-->
+            <fileNamePattern>
+                /var/log/tomcat/zwx-order/info.%d.log
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!--文件error日志输出配置项-->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--需要配置过滤项目只输出error信息 ThresholdFilter： 临界值过滤器，过滤掉低于指定临界值的日志。 不配置error和info都会输出-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!--过滤error级别以下的信息-->
+            <level>ERROR</level>
+        </filter>
+        <!--每天输入一个日志文件 滚动输出-->
+        <encoder>
+            <pattern>
+                %d - %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略 按照时间滚动-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件路径-->
+            <fileNamePattern>
+                /var/log/tomcat/zwx-order/error.%d.log
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!--配置项应用位置 整个项目-->
+    <root level="info">
+        <appender-ref ref="consoleLog"/>
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileErrorLog"/>
+    </root>
+</configuration>
