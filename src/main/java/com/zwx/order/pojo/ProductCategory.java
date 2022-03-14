@@ -1,47 +1,39 @@
 package com.zwx.order.pojo;
 
+import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * @author novo
  * @date 2022/3/13-21:50
  */
 @Entity
-@DynamicUpdate
+@DynamicUpdate //时间动态更新 如果pojo类有时间属性，避免查询对象后再更新时间updateTime不会同步更新，因为查询出来的对象本来就有updateTime
+@Data
 public class ProductCategory {
     @Id
-    @GeneratedValue
+    // SpringBoot2.x版本要添加strategy参数
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoryId;
 
     private String categoryName;
 
     private Integer categoryType;
 
-    public Integer getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
+    public ProductCategory(String categoryName, Integer categoryType) {
         this.categoryName = categoryName;
-    }
-
-    public Integer getCategoryType() {
-        return categoryType;
-    }
-
-    public void setCategoryType(Integer categoryType) {
         this.categoryType = categoryType;
     }
+
+    public ProductCategory() {
+    }
+    //private Date createTime;
+
+    //private Date updateTime;
 }
