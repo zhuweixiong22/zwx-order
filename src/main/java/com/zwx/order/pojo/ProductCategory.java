@@ -21,7 +21,7 @@ import java.util.Date;
 @Data
 public class ProductCategory {
     @Id
-    // SpringBoot2.x版本要添加strategy参数
+    // SpringBoot2.x版本要添加strategy参数自增参数
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoryId;
 

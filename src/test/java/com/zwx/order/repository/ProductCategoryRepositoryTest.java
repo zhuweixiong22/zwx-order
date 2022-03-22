@@ -10,7 +10,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author novo
@@ -47,8 +49,8 @@ public class ProductCategoryRepositoryTest {
 
     @Test
     public void findAll() {
-        List<Integer> list = Arrays.asList(11,66,7);
-        List<ProductCategory> result = repository.findByCategoryTypeIn(list);
+        Set<Integer> set = new HashSet<>(Arrays.asList(11,66,7));
+        List<ProductCategory> result = repository.findByCategoryTypeIn(set);
         Assert.assertNotEquals(0,result.size());
         System.out.println(result);
     }

@@ -3,6 +3,7 @@ package com.zwx.order.service;
 import com.zwx.order.pojo.ProductCategory;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author novo
@@ -13,7 +14,7 @@ public interface CategoryService {
 
     List<ProductCategory> findAll();
 
-    List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
+    List<ProductCategory> findByCategoryTypeIn(Set<Integer> categoryTypeList);
 
     ProductCategory save(ProductCategory productCategory);
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author novo
@@ -29,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList) {
+    public List<ProductCategory> findByCategoryTypeIn(Set<Integer> categoryTypeList) {
         return repository.findByCategoryTypeIn(categoryTypeList);
     }
 

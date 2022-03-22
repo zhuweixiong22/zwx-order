@@ -12,7 +12,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -40,7 +42,8 @@ public class CategoryServiceImplTest {
 
     @Test
     public void findByCategoryTypeIn() {
-        List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(Arrays.asList(11, 66, 67));
+        Set<Integer> set = new HashSet<>(Arrays.asList(11, 66, 67));
+        List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(set);
         Assert.assertNotEquals(0, productCategoryList.size());
     }
 

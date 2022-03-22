@@ -10,7 +10,8 @@ spring:
 server:
   port: 8080
   servlet:
-    context-path: /zwx-order
+    # url前缀 并且打包后项目的名字
+    context-path: /sell
 #logging:
   #pattern:
      #console: "%d - %msg%n"
