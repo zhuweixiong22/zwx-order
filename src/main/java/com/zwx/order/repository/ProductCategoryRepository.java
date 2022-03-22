@@ -1,4 +1,4 @@
-package com.zwx.order.Repository;
+package com.zwx.order.repository;
 
 import com.zwx.order.pojo.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +11,6 @@ import java.util.List;
  */
 
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory,Integer> {
-    List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryList);
+    // 使用jpa 需要无参的构造方法
+    List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
 }

@@ -1,4 +1,4 @@
-package com.zwx.order.Repository;
+package com.zwx.order.repository;
 
 import com.zwx.order.pojo.ProductCategory;
 import org.junit.Assert;
@@ -25,19 +25,16 @@ public class ProductCategoryRepositoryTest {
     // 使用hibernate需要一个没有参数的构造方法 否则会报错
     @Test
     public void findOneTest() {
-        ProductCategory productCategory = repository.findById(1).orElse(null);
-        productCategory.setCategoryName("畅销bang");
-        repository.save(productCategory);
+        ProductCategory productCategory = repository.findById(4).orElse(null);
         System.out.println(productCategory.toString());
     }
 
     @Test
     public void saveTest() {
-        ProductCategory productCategory = new ProductCategory("kk",66);
-        productCategory.setCategoryName("hhh");
-        productCategory.setCategoryType(11);
-        ProductCategory res = repository.save(productCategory);
-        Assert.assertNotNull(res);
+        ProductCategory productCategory = new ProductCategory("kk",67);
+        ProductCategory result = repository.save(productCategory);
+        Assert.assertNotNull(result);
+        //Assert.assertNotEquals(null,result);
     }
     @Test
     public void updateTest() {
@@ -50,7 +47,7 @@ public class ProductCategoryRepositoryTest {
 
     @Test
     public void findAll() {
-        List<Integer> list = Arrays.asList(2,3,10);
+        List<Integer> list = Arrays.asList(11,66,7);
         List<ProductCategory> result = repository.findByCategoryTypeIn(list);
         Assert.assertNotEquals(0,result.size());
         System.out.println(result);
