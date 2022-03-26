@@ -20,7 +20,7 @@ import java.util.Date;
 @Data
 public class OrderMaster {
     @Id
-    private String id;
+    private String orderId;
 
     private String buyerName;
 

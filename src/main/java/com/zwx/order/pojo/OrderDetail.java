@@ -16,6 +16,8 @@ public class OrderDetail {
     @Id
     private String detailId;
 
+    private String productId;
+
     private String orderId;
 
     private String productName;
