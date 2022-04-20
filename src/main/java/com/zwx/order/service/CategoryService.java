@@ -14,6 +14,11 @@ public interface CategoryService {
 
     List<ProductCategory> findAll();
 
+    /**
+     * 返回所有类目
+     * @param categoryTypeList
+     * @return
+     */
     List<ProductCategory> findByCategoryTypeIn(Set<Integer> categoryTypeList);
 
     ProductCategory save(ProductCategory productCategory);

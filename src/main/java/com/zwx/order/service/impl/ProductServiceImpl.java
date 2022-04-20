@@ -1,6 +1,8 @@
 package com.zwx.order.service.impl;
 
+import com.zwx.order.dto.CartDTO;
 import com.zwx.order.enums.ProductStatusEnum;
+import com.zwx.order.exception.SellException;
 import com.zwx.order.pojo.ProductInfo;
 import com.zwx.order.repository.ProductInfoRepository;
 import com.zwx.order.service.ProductService;
@@ -9,7 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author novo
@@ -25,10 +29,6 @@ public class ProductServiceImpl implements ProductService {
         return repository.findById(productId).orElse(null);
     }
 
-    /**
-     * 因为是微信小程序客户端的查询，一般不分页
-     * @return
-     */
     @Override
     public List<ProductInfo> findOnSaleAll() {
         return repository.findByProductStatus(ProductStatusEnum.ON_SALE.getCode());
@@ -42,5 +42,30 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductInfo save(ProductInfo productInfo) {
         return repository.save(productInfo);
+    }
+
+    @Override
+    public void increaseStock(List<CartDTO> cartDTOList) {
+
+    }
+
+    @Override
+    @Transactional
+    // TODO 超卖问题 使用redis的锁机制
+    public void decreaseStock(List<CartDTO> cartDTOList) {
+        for (CartDTO cartDTO : cartDTOList) {
+            ProductInfo productInfo = this.findById(cartDTO.getProductId());
+            if (productInfo == null) {
+                throw new SellException(ProductStatusEnum.PRODUCT_NOT_EXIT);
+            }
+
+            Integer result = productInfo.getProductStock() - cartDTO.getProductQuantity();
+            if (result < 0) {
+                throw new SellException(ProductStatusEnum.PRODUCT_STOCK_ERROR);
+            }
+
+            productInfo.setProductStock(result);
+            repository.save(productInfo);
+        }
     }
 }

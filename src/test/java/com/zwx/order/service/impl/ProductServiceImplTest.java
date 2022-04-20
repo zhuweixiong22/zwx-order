@@ -22,7 +22,7 @@ import java.util.List;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Transactional
+//@Transactional
 public class ProductServiceImplTest {
     @Resource
     private ProductServiceImpl productService;
@@ -59,7 +59,7 @@ public class ProductServiceImplTest {
         productInfo.setProductStock(100);
         productInfo.setProductDescription("so good");
         productInfo.setProductIcon("http://xxxx.jpg");
-        productInfo.setProductStatus(ProductStatusEnum.OFF_SALE.getCode());
+        productInfo.setProductStatus(ProductStatusEnum.ON_SALE.getCode());
         productInfo.setCategoryType(11);
         ProductInfo result = productService.save(productInfo);
         Assert.assertNotNull(result);

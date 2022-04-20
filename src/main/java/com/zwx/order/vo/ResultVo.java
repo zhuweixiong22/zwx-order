@@ -33,4 +33,8 @@ public class ResultVo<T> {
     public static <T> ResultVo<T> error(ResultEnum resultEnum) {
         return new ResultVo<>(resultEnum.getCode(), resultEnum.getDesc());
     }
+
+    public static <T> ResultVo<T> error(Integer code, String desc) {
+        return new ResultVo<>(code, desc);
+    }
 }
