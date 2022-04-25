@@ -45,8 +45,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public void increaseStock(List<CartDTO> cartDTOList) {
-
+        for (CartDTO cartDTO : cartDTOList) {
+            ProductInfo productInfo = this.findById(cartDTO.getProductId());
+            if (productInfo == null) {
+                throw new SellException(ProductStatusEnum.PRODUCT_NOT_EXIT);
+            }
+            productInfo.setProductStock(productInfo.getProductStock() + cartDTO.getProductQuantity());
+            repository.save(productInfo);
+        }
     }
 
     @Override

@@ -21,7 +21,7 @@ import java.util.Date;
 @Data
 public class ProductCategory {
     @Id
-    // SpringBoot2.x版本要添加strategy参数自增参数
+    // SpringBoot2.x版本如果需要让主键自增，但是JPA不知道我们的主键生成策略 要添加strategy参数IDENTITY指定交给数据库自增
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoryId;
 
