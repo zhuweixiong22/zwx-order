@@ -82,9 +82,9 @@ public class OrderServiceImpl implements OrderService {
 
         //3. mater订单入库
         OrderMaster orderMaster = new OrderMaster();
+        orderDTO.setOrderId(orderId);
+        orderDTO.setOrderAmount(orderAmount);
         BeanUtils.copyProperties(orderDTO, orderMaster); // 注意如果相同属性的值为null也会被拷贝，所以要注意先拷贝，后set其他属性
-        orderMaster.setOrderId(orderId);
-        orderMaster.setOrderAmount(orderAmount);
         orderMasterRepository.save(orderMaster);
 
         //4. 扣库存

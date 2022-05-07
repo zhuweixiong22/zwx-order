@@ -1,5 +1,6 @@
 package com.zwx.order.vo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.zwx.order.enums.ResultEnum;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import lombok.Data;
  * @date 2022/3/22-17:44
  */
 @Data
+@JsonInclude(value = JsonInclude.Include.NON_NULL)//如果json的data为null 不返回给前端
 public class ResultVo<T> {
     private Integer code;
 
