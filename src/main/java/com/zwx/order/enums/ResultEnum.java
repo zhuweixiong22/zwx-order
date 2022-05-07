@@ -22,6 +22,8 @@ public enum  ResultEnum {
 
     ORDER_DETAIL_EMPTY(15, "订单中无商品详情"),
 
+    ORDER_PAY_STATUS_ERROR(16, "支付状态异常"),
+
     ;
 
     Integer code;
